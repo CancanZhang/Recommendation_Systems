@@ -24,6 +24,9 @@ def train_test_split_avazu(source_dir, target_dir, ratio=0.8):
     df = shuffle(df)
     train_df = df.iloc[:index, :]
     test_df = df.iloc[index:, :]
+    print ('train_df', train_df.shape)
+    print ('test_df', test_df.shape)
+    
     train_df.to_csv(train_file, sep='\t', header=None, index=False)
     test_df.to_csv(test_file, sep='\t', header=None, index=False)
 
@@ -64,6 +67,7 @@ def generate_comb_276(source_dir, target_dir, X=5, Y=1):
     # Read data
     train_X, train_y = read_data(source_dir, CONTS, CATES, name='train')
     test_X,  test_y  = read_data(source_dir, CONTS, CATES, name='test')
+    print ('data readed...')
 
     # Generate selected pairs
     fields = np.arange(CATES)
@@ -71,10 +75,12 @@ def generate_comb_276(source_dir, target_dir, X=5, Y=1):
     for i in range(len(fields)):
         for j in range(i+1, len(fields)):
             selected_pairs.append((fields[i], fields[j]))
+    print ('selected pairs generated...')
 
     # Generate combinational dictionary
     dict_dir_comb = os.path.join(target_dir, 'X_' + str(X), 'dict_comb_276')
     generate_comb_dict(dict_dir_comb, train_X, selected_pairs, Y=Y)
+    print ('finished generating combinational dictionary')
 
     # Applying dictionary to categorical feature
     dict_dir = os.path.join(target_dir, 'X_' + str(X), 'dict_cate')
@@ -94,15 +100,18 @@ def generate_comb_276(source_dir, target_dir, X=5, Y=1):
     # concatenate
     final_train_X = np.concatenate([cate_train_X, comb_train_X], axis=1)
     final_test_X = np.concatenate([cate_train_X, comb_test_X], axis=1)
+    
 
     # Write train data to tfrecord
+    print ('writing...')
     orig_dir = os.path.join(target_dir, 'X_' + str(X), 'comb_276_Y_' +str(Y))
     write_to_tfrecord(final_train_X, train_y, orig_dir, CONTS, CATES, COMBS, name='train', partnum=500000)
     write_to_tfrecord(final_test_X, test_y, orig_dir, CONTS, CATES, COMBS, name='test', partnum=500000)
 
 def main():
-    source_dir = '../datasets/Avazu'
-    target_dir = '../datasets/Avazu-new'
+    prefix = '/data/users/jupyter-caz322/lehigh_courses/DSCI_441/Recommendation_Systems/'
+    source_dir = prefix + 'datasets/Avazu'
+    target_dir = prefix + 'datasets/Avazu-new'
     os.makedirs(target_dir, exist_ok=True)
     # train_test_split_avazu(source_dir, source_dir, ratio=0.8)
     # generate_orig_24(source_dir, target_dir)
