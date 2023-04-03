@@ -19,6 +19,11 @@ def generate_cate_dict(target_dir, train_X, cate_cols, cont_cols, X=20):
     shifts = []
     values = []
     cont_cate_cols = cont_cols + cate_cols
+    
+    dict_dir = os.path.join(target_dir, 'X_' + str(X), 'dict_cate')
+    if os.path.exists(dict_dir) and (len(os.listdir(dict_dir)) > 0):
+        return
+    
     for i, cat in enumerate(cate_cols):
         index = i + len(cont_cols)
         nan_index = index
@@ -36,7 +41,6 @@ def generate_cate_dict(target_dir, train_X, cate_cols, cont_cols, X=20):
         print(cat, 'nan' in values[i])
 
     # Generate dictionary
-    dict_dir = os.path.join(target_dir, 'X_' + str(X), 'dict_cate')
     os.makedirs(dict_dir, exist_ok=True)
     for i, feat_number in enumerate(shifts):
         index = np.arange(feat_number).astype('int32') + np.sum(shifts[0:i]).astype('int32') + int(len(cont_cate_cols))
@@ -48,6 +52,8 @@ def generate_cate_dict(target_dir, train_X, cate_cols, cont_cols, X=20):
 def generate_comb_dict(dict_dir, train_X, selected_pairs, Y=20):
     shifts = []
     values = []
+    if os.path.exists(dict_dir) and (len(os.listdir(dict_dir)) > 0):
+        return
     for index, (i, j) in enumerate(selected_pairs):
         a = np.array([str(x1) + '-' + str(x2) for x1, x2 in zip(train_X[:,i], train_X[:,j])])
         value, count = np.unique(a, return_counts=True)

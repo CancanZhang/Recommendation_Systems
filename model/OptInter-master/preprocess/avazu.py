@@ -9,6 +9,8 @@ def train_test_split_avazu(source_dir, target_dir, ratio=0.8):
     all_file = os.path.join(source_dir, 'full.csv')
     train_file = os.path.join(target_dir, 'train.txt')
     test_file = os.path.join(target_dir, 'test.txt')
+    if os.path.exists(train_file):
+        return
 
     df = pd.read_csv(all_file)
     day = df['hour'] // 100
@@ -20,10 +22,13 @@ def train_test_split_avazu(source_dir, target_dir, ratio=0.8):
     df['hour'] = hour
     df['weekday'] = weekday
 
-    index = int(ratio*(len(df)))
+    #index = int(ratio*(len(df)))
+    index_train = int(ratio*len(df)*0.1)
+    index_test = int((1-ratio)*len(df)*0.1)
+    
     df = shuffle(df)
-    train_df = df.iloc[:index, :]
-    test_df = df.iloc[index:, :]
+    train_df = df.iloc[:index_train, :]
+    test_df = df.iloc[-index_test:, :]
     print ('train_df', train_df.shape)
     print ('test_df', test_df.shape)
     
@@ -41,8 +46,13 @@ def generate_orig_24(source_dir, target_dir, X=5):
     train_X, train_y = read_data(source_dir, CONTS, CATES, name='train')
     test_X,  test_y  = read_data(source_dir, CONTS, CATES, name='test')
 
-    # Generate dictionary for category feature
+    # Generate dictionary for category feature 
     dict_dir = os.path.join(target_dir, 'X_'+str(X), 'dict_cate')
+    if not os.path.exists(os.path.join(target_dir, 'X_'+str(X))):
+        os.mkdir(os.path.join(target_dir, 'X_'+str(X)))
+    if not os.path.exists(dict_dir):
+        os.mkdir(dict_dir)
+        
     generate_cate_dict(target_dir, train_X, cate_cols, cont_cols, X)
 
     # Applying dictionary to categorical feature
@@ -67,7 +77,8 @@ def generate_comb_276(source_dir, target_dir, X=5, Y=1):
     # Read data
     train_X, train_y = read_data(source_dir, CONTS, CATES, name='train')
     test_X,  test_y  = read_data(source_dir, CONTS, CATES, name='test')
-    print ('data readed...')
+    print ('train_X', train_X.shape)
+    print ('test_X', test_X.shape)
 
     # Generate selected pairs
     fields = np.arange(CATES)
@@ -80,7 +91,6 @@ def generate_comb_276(source_dir, target_dir, X=5, Y=1):
     # Generate combinational dictionary
     dict_dir_comb = os.path.join(target_dir, 'X_' + str(X), 'dict_comb_276')
     generate_comb_dict(dict_dir_comb, train_X, selected_pairs, Y=Y)
-    print ('finished generating combinational dictionary')
 
     # Applying dictionary to categorical feature
     dict_dir = os.path.join(target_dir, 'X_' + str(X), 'dict_cate')
@@ -99,9 +109,10 @@ def generate_comb_276(source_dir, target_dir, X=5, Y=1):
 
     # concatenate
     final_train_X = np.concatenate([cate_train_X, comb_train_X], axis=1)
-    final_test_X = np.concatenate([cate_train_X, comb_test_X], axis=1)
+    final_test_X = np.concatenate([cate_test_X, comb_test_X], axis=1)
+    print ('final_train_X', final_train_X.shape)
+    print ('final_test_X', final_test_X.shape)
     
-
     # Write train data to tfrecord
     print ('writing...')
     orig_dir = os.path.join(target_dir, 'X_' + str(X), 'comb_276_Y_' +str(Y))
@@ -109,12 +120,12 @@ def generate_comb_276(source_dir, target_dir, X=5, Y=1):
     write_to_tfrecord(final_test_X, test_y, orig_dir, CONTS, CATES, COMBS, name='test', partnum=500000)
 
 def main():
-    prefix = '/data/users/jupyter-caz322/lehigh_courses/DSCI_441/Recommendation_Systems/'
+    prefix = '/home/jupyter-caz322/lehigh_courses/DSCI_441/Recommendation_Systems/'
     source_dir = prefix + 'datasets/Avazu'
     target_dir = prefix + 'datasets/Avazu-new'
     os.makedirs(target_dir, exist_ok=True)
-    # train_test_split_avazu(source_dir, source_dir, ratio=0.8)
-    # generate_orig_24(source_dir, target_dir)
+    train_test_split_avazu(source_dir, source_dir, ratio=0.8)
+    generate_orig_24(source_dir, target_dir)
     generate_comb_276(source_dir, target_dir)
 
 if __name__ == "__main__":
