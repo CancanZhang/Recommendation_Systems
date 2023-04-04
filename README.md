@@ -11,3 +11,8 @@ nohup python preprocess/criteo.py &> res/pre_criteo &
 nohup python preprocess/avazu.py &> res/pre_avazu &
 ```
 
+### Model training
+```
+nohup python learn/CriteoTrain.py --model FM --gpu 0 &> res/train_criteo &
+nohup python learn/AvazuTrain.py --model FM --gpu 0 &> res/train_avazu &
+```
