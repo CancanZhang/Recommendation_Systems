@@ -120,13 +120,14 @@ def generate_comb_276(source_dir, target_dir, X=5, Y=1):
     write_to_tfrecord(final_test_X, test_y, orig_dir, CONTS, CATES, COMBS, name='test', partnum=500000)
 
 def main():
-    prefix = '/home/jupyter-caz322/lehigh_courses/DSCI_441/Recommendation_Systems/'
+    #prefix = '/home/jupyter-caz322/lehigh_courses/DSCI_441/Recommendation_Systems/'
+    prefix = '/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/'
     source_dir = prefix + 'datasets/Avazu'
     target_dir = prefix + 'datasets/Avazu-new'
     os.makedirs(target_dir, exist_ok=True)
-    train_test_split_avazu(source_dir, source_dir, ratio=0.8)
+    #train_test_split_avazu(source_dir, source_dir, ratio=0.8)
     generate_orig_24(source_dir, target_dir)
-    generate_comb_276(source_dir, target_dir)
+    #generate_comb_276(source_dir, target_dir)
 
 if __name__ == "__main__":
     main()

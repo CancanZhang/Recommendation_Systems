@@ -1,0 +1,55 @@
+nohup: ignoring input
+2023-04-16 23:10:03.902117: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-04-16 23:10:03.959006: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-04-16 23:10:04.908762: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+cate_1 ['1005', '1010', '1002', '1007', '1012', '1001', '1008']
+cate_2 ['7', '2', '0', '1', '4', '5', '3']
+cate_3 ['463a95dc', '028f551e', '24e8046c', '8c788ce9', '347210c9', 'd5ffa4da', '3b3f9711', '16b4810b', '070ca277', '4f98a473']
+cate_4 ['21c8e67b', 'f3ca2e42', '1b18f5ac', 'b263665d', '83478447', '2730155c', '2a55382c', '9f448720', '5da2058a', '379a9289']
+cate_5 ['f66779e6', '335d28a8', '70fb0e29', '50e219e0', '9ccfa2ea', 'c0dd3be3', '3e814130', '42a36e14', '28905ebd', '72722551']
+cate_6 ['3f2a6cbb', '6fc85e22', '034f7404', 'a97b17d0', 'e6bf33a0', '1e2c67a7', '3da6a180', 'd3bfc528', 'dff8fff7', '113c58a9']
+cate_7 ['0654b444', 'b299335a', 'b7af3e0a', '9ecca2dd', '916026d9', '7eec2ab0', '448ca2e3', 'd9b5648e', '33da2e74', '999f1fac']
+cate_8 ['879c24eb', '5326cf99', '07d7df22', '2281a340', 'dc97ec06', '2fc4f2aa', '8ded1f7a', 'f95efa07', '7113d72a', 'a3c42688']
+cate_9 ['e4a5b358', 'eb4989ab', '02d01177', '94fd9424', '90a377be', '679ec896', 'cec23333', 'bea573a2', '0bf6990a', 'f2ef2813']
+cate_10 ['72a620f0', '5560965a', 'e975e1e2', '5ce8235c', 'a38ddd72', 'ff2b0b5d', '295144ae', '6ccefeae', '8e8446f4', 'd9576966']
+cate_11 ['16147744', '5ba3e60a', '82a79fff', '0e5a9b0a', '1dbc394f', '67264d38', 'a586787d', '998e3d0b', 'a1a7a957', '8adaf888']
+cate_12 ['0', '1', '4', '5']
+cate_13 ['5', '2', '3', '0']
+cate_14 ['22016', '787', '6559', '6991', '22782', '22312', '21738', '22982', '22111', '20382']
+cate_15 ['120', '728', '768', '216', '1024', '300', '320', '480']
+cate_16 ['250', '768', '90', '1024', '50', '320', '480', '20', '36']
+cate_17 ['2465', '2253', '2530', '2206', '2674', '2563', '2455', '2434', '1996', '2565']
+cate_18 ['1', '2', '3', '0']
+cate_19 ['1451', '171', '39', '161', '935', '427', '555', '559', '295', '290']
+cate_20 ['100221', '100004', '100152', '100193', '100024', '100185', '100070', '100188', '100117', '100168']
+cate_21 ['16', '171', '221', '93', '194', '100', '102', '1', '82', '17']
+cate_22 ['141021', '141027', '141029', '141030', '141026', '141023', '141025', '141022', '141028', '141024']
+cate_23 ['16', '14', '11', '1', '17', '13', '15', '6', '7', '2']
+cate_24 ['6', '2', '0', '1', '4', '5', '3']
+cate_1 False
+cate_2 False
+cate_3 False
+cate_4 False
+cate_5 False
+cate_6 False
+cate_7 False
+cate_8 False
+cate_9 False
+cate_10 False
+cate_11 False
+cate_12 False
+cate_13 False
+cate_14 False
+cate_15 False
+cate_16 False
+cate_17 False
+cate_18 False
+cate_19 False
+cate_20 False
+cate_21 False
+cate_22 False
+cate_23 False
+cate_24 False
+Finish generate dictionary
+0 (3234317, 1)	1 (3234317, 2)	2 (3234317, 3)	3 (3234317, 4)	4 (3234317, 5)	5 (3234317, 6)	6 (3234317, 7)	7 (3234317, 8)	8 (3234317, 9)	9 (3234317, 10)	10 (3234317, 11)	11 (3234317, 12)	12 (3234317, 13)	13 (3234317, 14)	14 (3234317, 15)	15 (3234317, 16)	16 (3234317, 17)	17 (3234317, 18)	18 (3234317, 19)	19 (3234317, 20)	20 (3234317, 21)	21 (3234317, 22)	22 (3234317, 23)	23 (3234317, 24)	0 (808579, 1)	1 (808579, 2)	2 (808579, 3)	3 (808579, 4)	4 (808579, 5)	5 (808579, 6)	6 (808579, 7)	7 (808579, 8)	8 (808579, 9)	9 (808579, 10)	10 (808579, 11)	11 (808579, 12)	12 (808579, 13)	13 (808579, 14)	14 (808579, 15)	15 (808579, 16)	16 (808579, 17)	17 (808579, 18)	18 (808579, 19)	19 (808579, 20)	20 (808579, 21)	21 (808579, 22)	22 (808579, 23)	23 (808579, 24)	maximun id: 104305

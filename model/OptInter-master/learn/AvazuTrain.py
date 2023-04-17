@@ -17,13 +17,14 @@ import utils
 from model.model import getmodel
 from loader.Avazuloader import get_data
 
+prefix = '/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/'
 
 parser = argparse.ArgumentParser(description="DARTS for RS")
 parser.add_argument('--debug_mode', type=int, default=0,
                     help='whether log and save the model and the output, 0 indicates yes, others indicate no')
 parser.add_argument('--dataset', type=str, default='avazu',
                     help='select dataset')
-parser.add_argument('--data_path', type=str, default=current_path + '../../datasets',
+parser.add_argument('--data_path', type=str, default=prefix + 'datasets',
                     help='location of the data corpus')
 parser.add_argument('--bsize', type=int, default=2, help='batch size')
 parser.add_argument('--lr', type=float, default=1e-3, 
@@ -235,6 +236,7 @@ def main():
 
 
 def infer(model, criterion, device, dataset_folder, use_comb, logging):
+    print ('==== infer: dataset_folder:{}'.format(dataset_folder))
     losses = utils.AvgrageMeter()
     model.eval()
     pred_list = []
@@ -277,6 +279,7 @@ def infer(model, criterion, device, dataset_folder, use_comb, logging):
 
 
 def train(model, criterion, optimizer, device, dataset_folder, use_comb, logging):
+    print ('==== train: dataset_folder:{}'.format(dataset_folder))
     losses = utils.AvgrageMeter()
     model.train()
     step = 0
@@ -285,7 +288,9 @@ def train(model, criterion, optimizer, device, dataset_folder, use_comb, logging
     for x, y in get_data(dataset_folder, name='train', bsize=args.bsize, \
             use_comb=use_comb, comb_field=args.comb_field):
         step += 1
-        batch_size = args.bsize * 1000
+        bsize = y.shape[0] # args.bsize
+        batch_size = bsize * 1000
+
         if len(y) != args.bsize:
             continue
         target = torch.reshape(y.to(device), shape=(batch_size, -1))

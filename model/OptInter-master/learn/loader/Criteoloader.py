@@ -41,7 +41,9 @@ def read_data_comb(raw_rec):
 
 @tf.autograph.experimental.do_not_convert
 def get_data(folder, name="train", bsize=2, use_comb=False, comb_field=0):
+    print ('get_data: ',folder + '/' + name + "*.tfrecord")
     files = glob.glob(folder + '/' + name + "*.tfrecord")
+    print ('files:',files)
     if use_comb:
         global COMBS 
         COMBS = comb_field

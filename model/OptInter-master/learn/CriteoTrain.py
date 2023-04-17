@@ -17,13 +17,14 @@ import utils
 from model.model import getmodel
 from loader.Criteoloader import get_data
 
+prefix = '/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/'
 
 parser = argparse.ArgumentParser(description="DARTS for RS")
 parser.add_argument('--debug_mode', type=int, default=0,
                     help='whether log and save the model and the output, 0 indicates yes, others indicate no')
 parser.add_argument('--dataset', type=str, default='criteo',
                     help='select dataset')
-parser.add_argument('--data_path', type=str, default=current_path + '../../datasets',
+parser.add_argument('--data_path', type=str, default=prefix + 'datasets',
                     help='location of the data corpus')
 parser.add_argument('--bsize', type=int, default=2, help='batch size')
 parser.add_argument('--lr', type=float, default=1e-3, 
@@ -187,7 +188,9 @@ def main():
     test_aucs = []
     last_auc = 0.
     last_log_loss = 0.
+    
     for epoch in range(args.epochs):
+        print ('====== epoch: {}/{}'.format(epoch, args.epochs))
         starttime = time.time()
         logging.info('epoch %d lr %e', epoch, lr)
 
@@ -231,6 +234,7 @@ def main():
     logging.info('best_log_loss %f', last_log_loss)
 
 def infer(model, criterion, device, dataset_folder, use_comb, logging):
+    print ('==== infer: dataset_folder:{}'.format(dataset_folder))
     losses = utils.AvgrageMeter()
     model.eval()
     pred_list = []
@@ -273,6 +277,7 @@ def infer(model, criterion, device, dataset_folder, use_comb, logging):
 
 
 def train(model, criterion, optimizer, device, dataset_folder, use_comb, logging):
+    print ('==== train: dataset_folder:{}'.format(dataset_folder))
     losses = utils.AvgrageMeter()
     model.train()
     step = 0
@@ -281,7 +286,9 @@ def train(model, criterion, optimizer, device, dataset_folder, use_comb, logging
     for x, y in get_data(dataset_folder, name='train', bsize=args.bsize, \
             use_comb=use_comb, comb_field=args.comb_field):
         step += 1
-        batch_size = args.bsize * 1000
+        bsize = y.shape[0] # args.bsize
+        batch_size = bsize * 1000
+
         target = torch.reshape(y.to(device), shape=(batch_size, -1))
 
         features = []

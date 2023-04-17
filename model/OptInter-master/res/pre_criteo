@@ -1,0 +1,59 @@
+nohup: ignoring input
+2023-04-16 23:08:07.641484: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-04-16 23:08:07.698862: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-04-16 23:08:08.651323: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+cate_1 ['ae82ea21', '2feb6f25', '38e415c5', 'b80f70aa', 'f43226eb', 'bd4b6d14', '1464facd', '3cc2325b', '88abfaf6', '4265881a']
+cate_2 ['b2659ff1', '1287a654', 'f0cf0024', '65ad571e', '38a947a1', '558b4efb', '13f25995', '6887a43c', '71b67965', '0f8a625c']
+cate_3 ['3ac86d70', '961138f9', '43ea8866', '89f4fd40', 'cebee428', '3a864d1f', '5568219d', '5d119cb3', '96909873', 'a274c10b']
+cate_4 ['bf26826f', '189a6cf3', '52307a54', '9d17e56e', '1e02be66', '496cc6a3', 'a136ae32', 'd3f04b3c', 'a54478b5', '1837f9a3']
+cate_5 ['47f98056', 'ce45a12f', '503ebb08', '2b1509da', '4f8b7acc', '5efa9cd7', 'b51ba398', '2a5534e7', '0942e0a7', 'a9411994']
+cate_6 ['e3520422', 'f1f2de2d', '3c46edb2', '6f6d9be8', '7e0ccccf', 'fe6b92e5', '3bf701e7', 'c76aecf6', '13718bbd', 'fdf16bc4']
+cate_7 ['3665bfd8', 'd5141a06', '79f07c52', '5ccd151c', 'ec46a16c', '174b20f9', '56be4e78', '25ac56e1', 'cc244126', '0c41b6a1']
+cate_8 ['e6210023', 'f99a5fd8', 'e93002ff', 'fb1cc3c2', 'bb170c38', 'd278a5c1', '2359e6e1', 'c5e75280', '0cf9eb7d', '227b02b1']
+cate_9 ['7cc72ec2', 'a73ee510', 'a18233ea']
+cate_10 ['165431e3', '3933e3aa', 'ceb22875', 'b8d70f7d', '81f943ba', 'c7009b63', '8b00e866', 'd10e3a7b', '9bed549c', '3fbc8adf']
+cate_11 ['053ff267', '603450c1', 'cba091a3', 'd70e2491', '4f7a9516', '7cd75ed0', '859b343f', '87dc9425', 'c4bd1c72', '2591ca7a']
+cate_12 ['9d043753', '63fdc0e8', '2a232af9', '077550ee', 'b8abf6d0', '15c71307', 'f722a68e', '863480c7', '87052a0a', '2436ff75']
+cate_13 ['025225f2', '58f40fc6', '540f3254', '1a1cefef', '12880350', '3c12244d', 'f5683374', 'ab8c2919', '7aab7990', '0afbe2b3']
+cate_14 ['cfef1c29', 'd2dfe871', '95a6ab8c', 'ad1cc976', '5aebfb83', '0601d3b5', '0bc7c8c2', 'cf1fc48d', 'ec19f520', 'f7c1b33f']
+cate_15 ['633f1661', '8a493b1e', '660b46ce', '06969a20', '49c56060', '1d7b5143', 'f477be21', 'e2615b47', 'f51c5877', '5513b22d']
+cate_16 ['6d922e3b', '1ab23e3c', '1f69c426', 'f5d0ce90', '66b225de', '809fddf1', '485e3066', 'e9bf9780', '5d0332b8', '743293f1']
+cate_17 ['1e88c74f', '2005abd1', 'e5ba7672', 'd4bb7bd8', '27c07bd6', '3486227d', '776ce399', '07c540c4', '8efede7f', 'af5d780c']
+cate_18 ['331176b7', '1fd72c2b', '445cbf32', '1490697e', 'c2d5aae5', '99d2d39e', 'fcea3412', '54db4613', '963139a7', 'a6991cf7']
+cate_19 ['88ab4f33', '25a9fa0d', '1a9b8580', '7f638078', 'fb2680c1', '65d4fce0', 'fefc1f4c', '3bdfbffd', '1d8ea798', '4fe3bd55']
+cate_20 ['nan', 'b1252a9d', '5840adea', 'a458ea53']
+cate_21 ['bdb62b3e', 'f7f350f8', 'b193a409', 'b3293b11', 'f9af73b1', '1a418f37', 'e0c0c3e2', '6e497b39', 'd9796b1c', '2b4c306d']
+cate_22 ['c9d4222a', '49e825c5', '28f45308', 'ccfd4002', '8ec974f4', '8651fddb', 'ad3062eb', '78e2e389', 'nan', 'c0061c6d']
+cate_23 ['93bad2c0', 'c3dc6cef', 'b264a060', '72592995', '3a171ecb', '32c7478e', 'c7dc6720', '85d5a995', '423fab69', '25e3c76b']
+cate_24 ['5d6532d9', '361bca5f', 'f71cb3db', '7e1d096b', '71cabb3a', 'fb9cde19', '4a7ab812', 'ce30369a', 'cb5fb171', '55efbd5c']
+cate_25 ['010f6491', '69ad139b', '24657b11', 'e13f3bf1', 'c243e98b', '1575c75f', '33d94071', '9d93af03', 'a1a5217e', '5a881a06']
+cate_26 ['a1004638', '2cb69935', 'a66816e7', '56340f84', '76bebb8a', '85ef09cb', 'dbbf0b31', '351507f1', '193a530d', 'fd7b14f1']
+cate_1 False
+cate_2 False
+cate_3 True
+cate_4 True
+cate_5 False
+cate_6 True
+cate_7 False
+cate_8 False
+cate_9 False
+cate_10 False
+cate_11 False
+cate_12 True
+cate_13 False
+cate_14 False
+cate_15 False
+cate_16 True
+cate_17 False
+cate_18 False
+cate_19 True
+cate_20 True
+cate_21 True
+cate_22 True
+cate_23 False
+cate_24 True
+cate_25 True
+cate_26 True
+Finish generate dictionary
+0 (2783531, 1)	1 (2783531, 2)	2 (2783531, 3)	3 (2783531, 4)	4 (2783531, 5)	5 (2783531, 6)	6 (2783531, 7)	7 (2783531, 8)	8 (2783531, 9)	9 (2783531, 10)	10 (2783531, 11)	11 (2783531, 12)	12 (2783531, 13)	0 (695882, 1)	1 (695882, 2)	2 (695882, 3)	3 (695882, 4)	4 (695882, 5)	5 (695882, 6)	6 (695882, 7)	7 (695882, 8)	8 (695882, 9)	9 (695882, 10)	10 (695882, 11)	11 (695882, 12)	12 (695882, 13)	0 (2783531, 1)	1 (2783531, 2)	2 (2783531, 3)	3 (2783531, 4)	4 (2783531, 5)	5 (2783531, 6)	6 (2783531, 7)	7 (2783531, 8)	8 (2783531, 9)	9 (2783531, 10)	10 (2783531, 11)	11 (2783531, 12)	12 (2783531, 13)	13 (2783531, 14)	14 (2783531, 15)	15 (2783531, 16)	16 (2783531, 17)	17 (2783531, 18)	18 (2783531, 19)	19 (2783531, 20)	20 (2783531, 21)	21 (2783531, 22)	22 (2783531, 23)	23 (2783531, 24)	24 (2783531, 25)	25 (2783531, 26)	0 (695882, 1)	1 (695882, 2)	2 (695882, 3)	3 (695882, 4)	4 (695882, 5)	5 (695882, 6)	6 (695882, 7)	7 (695882, 8)	8 (695882, 9)	9 (695882, 10)	10 (695882, 11)	11 (695882, 12)	12 (695882, 13)	13 (695882, 14)	14 (695882, 15)	15 (695882, 16)	16 (695882, 17)	17 (695882, 18)	18 (695882, 19)	19 (695882, 20)	20 (695882, 21)	21 (695882, 22)	22 (695882, 23)	23 (695882, 24)	24 (695882, 25)	25 (695882, 26)	maximun id: 87439.0
