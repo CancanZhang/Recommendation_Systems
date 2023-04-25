@@ -4,6 +4,7 @@ import torch.nn.functional as F
 #from utils import drop_path
 import numpy as np
 import sys
+from torch.autograd import Variable
 
 class LR(nn.Module):
     def __init__(self, cont_field, cate_field, cate_cont_feature, 
@@ -900,6 +901,146 @@ class DNN_cart(nn.Module):
     #     return L2
 
 
+class DCN(nn.Module):
+    def __init__(self, cont_field, cate_field, cate_cont_feature,
+                 orig_embedding_dim=40, hidden_dims=[128, 128], layer_num=2,
+                 device=torch.device('cpu'), lamb=0.):
+        super(DCN, self).__init__()
+        self.cont_field = cont_field
+        self.cate_field = cate_field
+        self.cate_cont_feature = cate_cont_feature
+        self.orig_embedding_dim = orig_embedding_dim
+        self.device = device
+        self.lamb = lamb
+        self.layer_num = layer_num
+
+        # Compute comb_field
+        self.cont_cate_field = self.cate_field + self.cont_field
+
+        # Create embedding table
+        self.cate_embeddings_table = \
+            nn.Embedding(self.cate_cont_feature, self.orig_embedding_dim)
+
+        # Cross part
+        feature_dim = self.orig_embedding_dim * self.cont_cate_field
+        self.kernels = nn.Parameter(torch.Tensor(self.layer_num, feature_dim, 1))
+        self.bias = nn.Parameter(torch.Tensor(self.layer_num, 1, feature_dim))
+
+        # init
+        for i in range(self.kernels.shape[0]):
+            nn.init.xavier_normal_(self.kernels[i])
+        for i in range(self.bias.shape[0]):
+            nn.init.zeros_(self.bias[i])
+
+        # Deep part
+        self.fc_layers = nn.ModuleList()
+        self.norm_layers = nn.ModuleList()
+
+        first_layer_neurons = self.orig_embedding_dim * self.cont_cate_field
+
+        self.fc_layers.append(nn.Linear(first_layer_neurons, hidden_dims[0]))
+        for _, (in_size, out_size) in enumerate(zip(hidden_dims[:-1], hidden_dims[1:])):
+            self.fc_layers.append(nn.Linear(in_size, out_size))
+
+        for _, size in enumerate(hidden_dims):
+            self.norm_layers.append(nn.LayerNorm(size))
+
+        #self.output_layer = nn.Linear(hidden_dims[-1], 1)
+
+        # final layer
+        self.dnn_linear = nn.Linear(feature_dim + hidden_dims[-1], 1, bias=False)
+
+        # init
+        for name, tensor in self.fc_layers.named_parameters():
+            if 'weight' in name:
+                nn.init.xavier_uniform_(tensor, gain=1)
+        for name, tensor in self.dnn_linear.named_parameters():
+            if 'weight' in name:
+                nn.init.xavier_uniform_(tensor, gain=1)
+        for name, tensor in self.cate_embeddings_table.named_parameters():
+            if 'weight' in name:
+                a = np.square(3 / (self.cate_field * self.orig_embedding_dim))
+                nn.init.uniform_(tensor, -a, a)
+
+    def forward(self, conts, cates, combs):
+        # Assert the batch sizes are the same
+        batch_size = conts.size()[0]
+        assert batch_size == cates.size()[0]
+
+        # Get continuous, categorical and free combinad embeddings
+        cont_embedding = torch.IntTensor(np.arange(self.cont_field)) \
+            .expand_as(conts).to(self.device)
+        cont_embedding = self.cate_embeddings_table(cont_embedding)
+        conts = conts.unsqueeze(2)
+        cont_embedding = torch.mul(cont_embedding, conts)
+        cate_embedding = self.cate_embeddings_table(cates)
+
+        # CrossNet
+        cont_cate_embedding = torch.cat((cont_embedding.reshape(batch_size, -1), cate_embedding.reshape(batch_size, -1)), 1)
+        #print('cross net input:',cont_cate_embedding.shape)
+        x0 = cont_cate_embedding
+        xl = x0
+        for i in range(self.layer_num):
+            #print ('xl:{}, kernel:{}'.format(xl.shape,self.kernels[i].shape))
+            xl_w = torch.tensordot(xl, self.kernels[i], dims=([1], [0]))
+            #print ('xl_w: ',xl_w.shape)
+            #dot_ = torch.matmul(x0, xl_w)
+            dot_ = x0 * xl_w
+            #print ('dot_:{}, bias:{}, xl:{} ',dot_.shape,self.bias[i].shape,xl.shape)
+            xl = dot_ + self.bias[i] + xl
+
+        #print('xl: ', xl.shape)
+        #X_CROSS = torch.squeeze(xl, dim=2)
+        X_CROSS = xl
+        #print ('cross output:', X_CROSS.shape)
+
+        # Deep part
+        cont_embedding = cont_embedding.reshape(batch_size, -1)
+        cate_embedding = cate_embedding.reshape(batch_size, -1)
+        X_DNN = torch.cat((cont_embedding, cate_embedding), 1)
+
+        for idx in range(len(self.fc_layers)):
+            X_DNN = self.fc_layers[idx](X_DNN)
+            X_DNN = self.norm_layers[idx](X_DNN)
+            X_DNN = F.relu(X_DNN)
+        #X_DNN = self.output_layer(X_DNN)
+        #print ('dnn output', X_DNN.shape)
+
+        X = torch.cat((X_CROSS, X_DNN), dim=-1)
+        #print ('X: ',X.shape)
+        logit = self.dnn_linear(X)
+        logit = torch.sigmoid(logit)
+        return logit
+
+    def l2_penalty(self, conts, cates, combs):
+        # Assert the batch sizes are the same
+        batch_size = conts.size()[0]
+        assert batch_size == (cates.size()[0])
+        conts = conts.reshape(batch_size, -1)
+        cates = cates.reshape(batch_size, -1)
+
+        # Get continuous, categorical and free combinad embeddings
+        cont_embedding = torch.IntTensor(np.arange(self.cont_field)) \
+            .expand_as(conts).to(self.device)
+        cont_embedding = self.cate_embeddings_table(cont_embedding)
+        conts = conts.unsqueeze(2)
+        cont_embedding = torch.mul(cont_embedding, conts)
+        cate_embedding = self.cate_embeddings_table(cates)
+
+        # Compute and reshape combined embeddings
+        X = torch.cat((cont_embedding, cate_embedding), 1).reshape(batch_size, -1)
+
+        # Calculate L2
+        L2 = torch.pow(X, 2) * self.lamb
+        L2 = L2.sum()
+
+        return L2
+
+
+
+
+
+
 
 ##### Model and Alpha Mode #####
 # Model: DNN_cart
@@ -945,5 +1086,7 @@ def getmodel(model_name, cont_field, cate_field, cate_cont_feature, comb_feature
     elif model_name == 'PIN':
         model = PIN(cont_field, cate_field, cate_cont_feature, device=device,
             orig_embedding_dim=orig_embedding_dim, hidden_dims=hidden_dims, lamb=lamb)
-    
+    elif model_name == 'DCN':
+        model = DCN(cont_field, cate_field, cate_cont_feature, device=device,
+            orig_embedding_dim=orig_embedding_dim, hidden_dims=hidden_dims, lamb=lamb)
     return model
