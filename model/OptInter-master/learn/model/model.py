@@ -1208,6 +1208,13 @@ class AFM(nn.Module):
             if 'weight' in name:
                 nn.init.xavier_uniform_(tensor, gain=1)
 
+        # interaction index
+        self.row,self.col = [],[]
+        for i in range(self.cont_cate_field):
+            for j in range(i+1,self.cont_cate_field):
+                self.row.append(i)
+                self.col.append(j)
+
     def forward(self, conts, cates, combs):
         # Assert the batch sizes are the same
         batch_size = conts.size()[0]
@@ -1224,6 +1231,9 @@ class AFM(nn.Module):
         # AFM part
         cont_cate_embedding = torch.cat((cont_embedding, cate_embedding), 1)
         #print ('input: ',cont_cate_embedding.shape)
+        element_wise_product_list = cont_cate_embedding[:,self.row] * cont_cate_embedding[:,self.col]
+        #print('element_wise_product_list:', element_wise_product_list.shape)
+        '''
         element_wise_product_list = []
         for i in range(self.cont_cate_field):
             for j in range(i+1,self.cont_cate_field):
@@ -1234,7 +1244,7 @@ class AFM(nn.Module):
         #print ('element_wise_product_list:', element_wise_product_list.shape)
         element_wise_product_list = torch.transpose(element_wise_product_list, 0, 1) # (None, 741, self.orig_embedding_dim)
         #print ('element_wise_product_list:', element_wise_product_list.shape)
-
+        '''
         attn_scores = F.relu(self.attention(element_wise_product_list))
         #print ('attn_scores:',attn_scores.shape)
         attn_scores = F.softmax(self.projection(attn_scores), dim=1)
