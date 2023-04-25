@@ -1170,8 +1170,104 @@ class DCNv2(nn.Module):
         return L2
 
 
+class AFM(nn.Module):
+    def __init__(self, cont_field, cate_field, cate_cont_feature,
+                orig_embedding_dim=40, hidden_dims=[100,100],
+                device=torch.device('cpu'), lamb=0.):
+        super(AFM, self).__init__()
+        self.cont_field = cont_field
+        self.cate_field = cate_field
+        self.cate_cont_feature = cate_cont_feature
+        self.orig_embedding_dim = orig_embedding_dim
+        self.device = device
+        self.lamb = lamb
+        self.cont_cate_field = self.cate_field + self.cont_field
+        self.num_interactions = self.cont_cate_field * (self.cont_cate_field-1) // 2
+        print ('number of interactions: ', self.num_interactions)
+        # Create embedding table
+        self.cate_embeddings_table = \
+            nn.Embedding(self.cate_cont_feature, self.orig_embedding_dim)
 
+        for name, tensor in self.cate_embeddings_table.named_parameters():
+            if 'weight' in name:
+                a = np.square(3/(self.cate_field * self.orig_embedding_dim))
+                nn.init.uniform_(tensor, -a, a)
 
+        # for AFM layer
+        self.attention = nn.Linear(self.orig_embedding_dim, 8, bias=True)
+        self.projection = nn.Linear(8, 1, bias=False)
+        self.fc = torch.nn.Linear(self.orig_embedding_dim, 1, bias=True)
+
+        for name, tensor in self.attention.named_parameters():
+            if 'weight' in name:
+                nn.init.xavier_uniform_(tensor, gain=1)
+        for name, tensor in self.projection.named_parameters():
+            if 'weight' in name:
+                nn.init.xavier_uniform_(tensor, gain=1)
+        for name, tensor in self.fc.named_parameters():
+            if 'weight' in name:
+                nn.init.xavier_uniform_(tensor, gain=1)
+
+    def forward(self, conts, cates, combs):
+        # Assert the batch sizes are the same
+        batch_size = conts.size()[0]
+        assert batch_size == cates.size()[0]
+
+        # Get continuous, categorical and free combinad embeddings
+        cont_embedding = torch.IntTensor(np.arange(self.cont_field))\
+                .expand_as(conts).to(self.device)
+        cont_embedding = self.cate_embeddings_table(cont_embedding)
+        conts = conts.unsqueeze(2)
+        cont_embedding = torch.mul(cont_embedding, conts)
+        cate_embedding = self.cate_embeddings_table(cates)
+
+        # AFM part
+        cont_cate_embedding = torch.cat((cont_embedding, cate_embedding), 1)
+        #print ('input: ',cont_cate_embedding.shape)
+        element_wise_product_list = []
+        for i in range(self.cont_cate_field):
+            for j in range(i+1,self.cont_cate_field):
+                mul = cont_cate_embedding[:,i,:] * cont_cate_embedding[:,j,:]
+                #print ('mul:',mul.shape)
+                element_wise_product_list.append(mul)
+        element_wise_product_list = torch.stack(element_wise_product_list,axis=0)
+        #print ('element_wise_product_list:', element_wise_product_list.shape)
+        element_wise_product_list = torch.transpose(element_wise_product_list, 0, 1) # (None, 741, self.orig_embedding_dim)
+        #print ('element_wise_product_list:', element_wise_product_list.shape)
+
+        attn_scores = F.relu(self.attention(element_wise_product_list))
+        #print ('attn_scores:',attn_scores.shape)
+        attn_scores = F.softmax(self.projection(attn_scores), dim=1)
+        #print ('attn_scores:',attn_scores.shape)
+        attn_output = torch.sum(attn_scores * element_wise_product_list, dim=1)
+        #print ('attn_output:',attn_output.shape)
+        X_AFM = self.fc(attn_output)
+        logit = torch.sigmoid(X_AFM)
+        return logit
+
+    def l2_penalty(self, conts, cates, combs):
+        # Assert the batch sizes are the same
+        batch_size = conts.size()[0]
+        assert batch_size == (cates.size()[0])
+        conts = conts.reshape(batch_size, -1)
+        cates = cates.reshape(batch_size, -1)
+
+        # Get continuous, categorical and free combinad embeddings
+        cont_embedding = torch.IntTensor(np.arange(self.cont_field))\
+                .expand_as(conts).to(self.device)
+        cont_embedding = self.cate_embeddings_table(cont_embedding)
+        conts = conts.unsqueeze(2)
+        cont_embedding = torch.mul(cont_embedding, conts)
+        cate_embedding = self.cate_embeddings_table(cates)
+
+        # Compute and reshape combined embeddings
+        X = torch.cat((cont_embedding, cate_embedding), 1).reshape(batch_size, -1)
+
+        # Calculate L2
+        L2 = torch.pow(X, 2) * self.lamb
+        L2 = L2.sum()
+
+        return L2
 
 
 
@@ -1224,5 +1320,8 @@ def getmodel(model_name, cont_field, cate_field, cate_cont_feature, comb_feature
             orig_embedding_dim=orig_embedding_dim, hidden_dims=hidden_dims, lamb=lamb)
     elif model_name == 'DCNv2':
         model = DCNv2(cont_field, cate_field, cate_cont_feature, device=device,
+            orig_embedding_dim=orig_embedding_dim, hidden_dims=hidden_dims, lamb=lamb)
+    elif model_name == 'AFM':
+        model = AFM(cont_field, cate_field, cate_cont_feature, device=device,
             orig_embedding_dim=orig_embedding_dim, hidden_dims=hidden_dims, lamb=lamb)
     return model

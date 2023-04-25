@@ -109,7 +109,7 @@ def main():
             use_comb = True
             dataset_folder = args.data_path + '/Avazu-new/X_' + str(args.X) + '/comb_' + \
                 str(args.comb_field) + '_Y_' + str(args.Y)
-        elif args.alpha_mode in [2,3] or args.model in ['LR', 'FM', 'FNN', 'IPNN', 'DeepFM', 'PIN', 'DCN', 'DCNv2']:
+        elif args.alpha_mode in [2,3] or args.model in ['LR', 'FM', 'FNN', 'IPNN', 'DeepFM', 'PIN', 'DCN', 'DCNv2', 'AFM']:
             use_comb = False
             dataset_folder = args.data_path + '/Avazu-new/X_' + str(args.X) + '/orig_24'
     else:
@@ -132,7 +132,7 @@ def main():
 
     # Select Model
     hidden_dims=[500,500,500,500,500]
-    assert args.model in ['DNN_cart', 'LR', 'FM', 'Poly2', 'FNN', 'IPNN', 'DeepFM', 'PIN', 'DCN', 'DCNv2']
+    assert args.model in ['DNN_cart', 'LR', 'FM', 'Poly2', 'FNN', 'IPNN', 'DeepFM', 'PIN', 'DCN', 'DCNv2', 'AFM']
     assert args.alpha_mode >= 0 and args.alpha_mode <= 3
     if args.model == 'DNN_cart':
         logging.info('alpha_mode = %s', args.alpha_mode)
@@ -150,7 +150,7 @@ def main():
                 device=device, alpha_mode=args.alpha_mode,
                 orig_embedding_dim=args.orig_embedding_dim,
                 comb_embedding_dim=args.comb_embedding_dim)
-    elif args.model in ['LR', 'FM', 'FNN', 'IPNN', 'DeepFM', 'PIN', 'DCN', 'DCNv2']:
+    elif args.model in ['LR', 'FM', 'FNN', 'IPNN', 'DeepFM', 'PIN', 'DCN', 'DCNv2', 'AFM']:
         model = getmodel(args.model, cont_field, cate_field, 
                 original_feature, combined_feature, 
                 hidden_dims=hidden_dims,
@@ -179,7 +179,7 @@ def main():
                             list(model.output_layer.parameters())
         unregularized_optim_config = {'params': unregularized_param, 'lr': args.lr}
         optimizer = optim.Adam([regularized_optim_config, unregularized_optim_config])
-    elif args.model in ['LR', 'FM', 'Poly2', 'FNN', 'IPNN', 'DeepFM', 'PIN', 'DCN', 'DCNv2']:
+    elif args.model in ['LR', 'FM', 'Poly2', 'FNN', 'IPNN', 'DeepFM', 'PIN', 'DCN', 'DCNv2', 'AFM']:
         optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
     lr = args.lr
