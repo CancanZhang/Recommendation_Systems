@@ -1,0 +1,64 @@
+nohup: ignoring input
+2023-04-17 00:38:17.936687: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-04-17 00:38:17.994508: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-04-17 00:38:18.976825: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Experiment dir : logs/eval-EXP-20230417-003820
+04/17 12:38:20 AM device = cuda
+04/17 12:38:20 AM args = Namespace(debug_mode=0, dataset='avazu', data_path='/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets', bsize=2, lr=0.0001, l2=3e-08, report_freq=1000, gpu=0, epochs=10, load='logs/search-EXP-20210326-102728', save='logs/eval-EXP-20230417-003820', alpha_mode=1, model='DeepFM', orig_embedding_dim=40, comb_embedding_dim=4, X=5, Y=1, comb_field=276)
+04/17 12:38:24 AM param size = 0.506398 GB
+04/17 12:38:24 AM model = DeepFM(
+  (cate_embeddings_table): Embedding(1228795, 40)
+  (fc_layers): ModuleList(
+    (0): Linear(in_features=960, out_features=500, bias=True)
+    (1-4): 4 x Linear(in_features=500, out_features=500, bias=True)
+  )
+  (norm_layers): ModuleList(
+    (0-4): 5 x LayerNorm((500,), eps=1e-05, elementwise_affine=True)
+  )
+  (output_layer): Linear(in_features=500, out_features=1, bias=True)
+)
+04/17 12:38:24 AM epoch 0 lr 1.000000e-04
+2023-04-17 00:38:24.969804: I tensorflow/compiler/xla/service/service.cc:169] XLA service 0xbaeafa0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2023-04-17 00:38:24.969986: I tensorflow/compiler/xla/service/service.cc:177]   StreamExecutor device (0): Host, Default Version
+2023-04-17 00:38:24.971104: W tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:47] Overriding orig_value setting because the TF_FORCE_GPU_ALLOW_GROWTH environment variable is set. Original config value was 0.
+2023-04-17 00:38:24.971246: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1635] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 33070 MB memory:  -> device: 0, name: NVIDIA A100-SXM4-40GB, pci bus id: 0000:00:04.0, compute capability: 8.0
+2023-04-17 00:38:24.973471: I tensorflow/compiler/xla/service/service.cc:169] XLA service 0xbb683c0 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2023-04-17 00:38:24.973599: I tensorflow/compiler/xla/service/service.cc:177]   StreamExecutor device (0): NVIDIA A100-SXM4-40GB, Compute Capability 8.0
+2023-04-17 00:38:25.041290: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [2]
+	 [[{{node Placeholder/_0}}]]
+2023-04-17 00:38:25.041679: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [2]
+	 [[{{node Placeholder/_0}}]]
+==== train: dataset_folder:/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets/Avazu-new/X_5/orig_24
+04/17 12:38:43 AM train 1000 3.995529e-01
+04/17 12:38:43 AM Time 19.028859
+04/17 12:38:54 AM train_loss 0.397117
+2023-04-17 00:38:54.666944: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [1]
+	 [[{{node Placeholder/_0}}]]
+2023-04-17 00:38:54.667333: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [1]
+	 [[{{node Placeholder/_0}}]]
+==== infer: dataset_folder:/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets/Avazu-new/X_5/orig_24
+04/17 12:38:56 AM test_auc 0.756448
+04/17 12:38:56 AM test_log_loss 0.392446
+04/17 12:38:58 AM Epoch time: 33.860261 s
+04/17 12:38:58 AM Train time: 29.692072 s
+04/17 12:38:58 AM Test time: 2.124196 s
+04/17 12:38:58 AM epoch 1 lr 1.000000e-04
+2023-04-17 00:38:58.836170: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [2]
+	 [[{{node Placeholder/_0}}]]
+2023-04-17 00:38:58.836613: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [2]
+	 [[{{node Placeholder/_0}}]]
+==== train: dataset_folder:/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets/Avazu-new/X_5/orig_24
+04/17 12:39:16 AM train 1000 3.799894e-01
+04/17 12:39:16 AM Time 17.611466
+04/17 12:39:25 AM train_loss 0.379727
+2023-04-17 00:39:25.942103: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [1]
+	 [[{{node Placeholder/_0}}]]
+2023-04-17 00:39:25.942476: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [1]
+	 [[{{node Placeholder/_0}}]]
+==== infer: dataset_folder:/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets/Avazu-new/X_5/orig_24
+04/17 12:39:29 AM test_auc 0.752336
+04/17 12:39:29 AM test_log_loss 0.396704
+04/17 12:39:29 AM Early stopped!
+04/17 12:39:29 AM best_test_auc 0.756448
+04/17 12:39:29 AM best_log_loss 0.392446

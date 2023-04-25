@@ -948,7 +948,7 @@ class DCN(nn.Module):
         #self.output_layer = nn.Linear(hidden_dims[-1], 1)
 
         # final layer
-        self.dnn_linear = nn.Linear(feature_dim + hidden_dims[-1], 1, bias=False)
+        self.dnn_linear = nn.Linear(feature_dim + hidden_dims[-1], 1, bias=True)
 
         # init
         for name, tensor in self.fc_layers.named_parameters():
