@@ -1,12 +1,13 @@
 ## Feature Interaction in Recommendation Systems
 
-The github is based on:
-https://github.com/fuyuanlyu/OptInter
+The github is based on: https://github.com/fuyuanlyu/OptInter
 
 ***Contribution:*** Three models were added: DCN, DCNv2, Attention FM (AFM)
 
 Attention FM refered to: 
+
 https://github.com/hexiangnan/attentional_factorization_machine
+
 https://github.com/rixwew/pytorch-fm
 
 ### Folder
