@@ -1,3 +1,5 @@
+## Feature Interaction in Recommendation Systems
+
 The github is based on:
 https://github.com/fuyuanlyu/OptInter
 
@@ -10,6 +12,18 @@ https://github.com/rixwew/pytorch-fm
 ### Folder
 ```
 cd /content/drive/MyDrive/Lehigh/Courses/'DSCI 441 Statistical and Machine Learning'/project/Recommendation_Systems/model/
+```
+
+### Dataset
+Criteo dataset: https://www.kaggle.com/datasets/mrkmakr/criteo-dataset
+Avazu dataset: https://www.kaggle.com/c/avazu-ctr-prediction/data
+For Criteo dataset, copy the train.txt file under datasets/Criteo and rename it to full.txt.
+For Avazu dataset, copy the train.csv file under datasets/Avazu and rename it to full.csv.
+
+```
+mkdir datasets
+mkdir datasets/Criteo
+mkdir datasets/Avazu
 ```
 
 ### Data processing
