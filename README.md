@@ -4,11 +4,6 @@ The github is based on: https://github.com/fuyuanlyu/OptInter
 
 ***Contribution:*** Three models were added: DCN, DCNv2, Attention FM (AFM)
 
-Attention FM refered to: 
-
-https://github.com/hexiangnan/attentional_factorization_machine
-
-https://github.com/rixwew/pytorch-fm
 
 ### Folder
 ```
@@ -63,3 +58,11 @@ nohup python learn/CriteoTrain.py --model AFM --gpu 0 --lr 0.01 &> res/train_cri
 nohup python learn/AvazuTrain.py --model AFM --gpu 0 --lr 0.01 &> res/train_avazu_afm &
 
 ```
+
+#### Appendix
+
+Attention FM refered to: 
+
+https://github.com/hexiangnan/attentional_factorization_machine
+
+https://github.com/rixwew/pytorch-fm
