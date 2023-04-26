@@ -1,26 +1,31 @@
 The github is based on:
-Paper: Memorize, Factorize, or be Naive: Learning Optimal Feature Interaction Methods for CTR Prediction 
-https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9835208&tag=1
-```
-cd /content/drive/MyDrive/Lehigh/Courses/'DSCI 441 Statistical and Machine Learning'/project/Recommendation_Systems/model/OptInter-master
-```
-### Data processing
-To speed up, I only use 8% data as training set and 2% data as test set.
+https://github.com/fuyuanlyu/OptInter
 
-```
-cd model/OptInter-master
-nohup python preprocess/criteo.py &> res/pre_criteo &
-nohup python preprocess/avazu.py &> res/pre_avazu &
-```
-
-### Model training
+***Contribution:*** Three models were added: DCN, DCNv2, Attention FM (AFM)
 
 Attention FM refered to: 
 https://github.com/hexiangnan/attentional_factorization_machine
 https://github.com/rixwew/pytorch-fm
 
+### Folder
+```
+cd /content/drive/MyDrive/Lehigh/Courses/'DSCI 441 Statistical and Machine Learning'/project/Recommendation_Systems/model/
+```
+
+### Data processing
+To speed up, I only use 8% data as training set and 2% data as test set.
 
 ```
+cd model
+nohup python preprocess/criteo.py &> res/pre_criteo &
+nohup python preprocess/avazu.py &> res/pre_avazu &
+```
+
+### Model training
+The learning rate all set to 0.001 except AFM (0.01) which is slow to converge.
+
+```
+cd model
 nohup python learn/CriteoTrain.py --model FM --gpu 0 &> res/train_criteo &
 nohup python learn/AvazuTrain.py --model FM --gpu 0 &> res/train_avazu &
 
