@@ -16,8 +16,11 @@ cd /content/drive/MyDrive/Lehigh/Courses/'DSCI 441 Statistical and Machine Learn
 
 ### Dataset
 Criteo dataset: https://www.kaggle.com/datasets/mrkmakr/criteo-dataset
+
 Avazu dataset: https://www.kaggle.com/c/avazu-ctr-prediction/data
+
 For Criteo dataset, copy the train.txt file under datasets/Criteo and rename it to full.txt.
+
 For Avazu dataset, copy the train.csv file under datasets/Avazu and rename it to full.csv.
 
 ```
