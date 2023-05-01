@@ -1,4 +1,4 @@
-## Feature Interaction in Recommendation Systems
+# Feature Interaction in Recommendation Systems
 
 This project created a benchmark comparing
 
@@ -11,6 +11,18 @@ The github is based on: https://github.com/fuyuanlyu/OptInter
 
 ***Contribution:*** Three models were added: DCN, DCNv2, Attention FM (AFM)
 
+***Note:***
+To run the demo or training, the fastest way is to download the full folder including original datasets and dataset after preprocess from google drive:
+https://drive.google.com/drive/folders/1a40pNMy1W2TD0QZwdU-dVjGYZRzdf2vr?usp=share_link
+
+
+## Running Demo
+```
+cd demo
+streamlit run app.py
+```
+
+## Running Model
 ### Enviroment
 ```
 pip install -r model/requirements.txt
