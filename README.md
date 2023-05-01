@@ -11,10 +11,17 @@ The github is based on: https://github.com/fuyuanlyu/OptInter
 
 ***Contribution:*** Three models were added: DCN, DCNv2, Attention FM (AFM)
 
+### Enviroment
+```
+pip install -r model/requirements.txt
+```
+
 
 ### Folder
 ```
 cd /content/drive/MyDrive/Lehigh/Courses/'DSCI 441 Statistical and Machine Learning'/project/Recommendation_Systems/model/
+
+cd /Users/cancan/caz322@lehigh.edu\ -\ Google\ Drive/My\ Drive/Lehigh/Courses/DSCI\ 441\ Statistical\ and\ Machine\ Learning/project/Recommendation_Systems
 ```
 
 ### Dataset
