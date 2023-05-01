@@ -2,6 +2,13 @@
 
 The github is based on: https://github.com/fuyuanlyu/OptInter
 
+This project created a benchmark comparing
+
+- 6 feature interaction methods: Factorization Machines (FM), Product-based Neural Network (PNN), DeepFM, Deep Cross Network (DCN), Deep Cross Network v2 (DCNv2), Attention Factorization Machine (AFM)
+
+- on 2 datasets: Criteo, Avazu.
+
+
 ***Contribution:*** Three models were added: DCN, DCNv2, Attention FM (AFM)
 
 
