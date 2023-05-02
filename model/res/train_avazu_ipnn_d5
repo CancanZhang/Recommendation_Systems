@@ -1,0 +1,72 @@
+nohup: ignoring input
+2023-05-01 21:23:46.935603: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-05-01 21:23:48.289659: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Experiment dir : logs/eval-EXP-20230501-212350
+05/01 09:23:50 PM device = cuda
+05/01 09:23:50 PM args = Namespace(debug_mode=0, dataset='avazu', data_path='/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets', bsize=2, lr=0.001, l2=3e-08, report_freq=1000, gpu=0, epochs=10, load='logs/search-EXP-20210326-102728', save='logs/eval-EXP-20230501-212350', alpha_mode=1, model='IPNN', orig_embedding_dim=5, comb_embedding_dim=4, X=5, Y=1, comb_field=276)
+05/01 09:23:59 PM param size = 0.073500 GB
+05/01 09:23:59 PM model = IPNN(
+  (cate_embeddings_table): Embedding(1228795, 5)
+  (fc_layers): ModuleList(
+    (0): Linear(in_features=396, out_features=500, bias=True)
+    (1-4): 4 x Linear(in_features=500, out_features=500, bias=True)
+  )
+  (norm_layers): ModuleList(
+    (0-4): 5 x LayerNorm((500,), eps=1e-05, elementwise_affine=True)
+  )
+  (output_layer): Linear(in_features=500, out_features=1, bias=True)
+)
+05/01 09:23:59 PM epoch 0 lr 1.000000e-03
+2023-05-01 21:24:01.278740: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:996] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2023-05-01 21:24:01.291198: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:996] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2023-05-01 21:24:01.292141: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:996] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2023-05-01 21:24:01.322092: I tensorflow/compiler/xla/service/service.cc:169] XLA service 0xb9e4f80 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2023-05-01 21:24:01.322234: I tensorflow/compiler/xla/service/service.cc:177]   StreamExecutor device (0): Host, Default Version
+2023-05-01 21:24:01.322454: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:996] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2023-05-01 21:24:01.322784: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:996] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2023-05-01 21:24:01.323091: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:996] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2023-05-01 21:24:01.323493: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:996] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2023-05-01 21:24:01.323837: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:996] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2023-05-01 21:24:01.324089: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:996] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2023-05-01 21:24:01.324311: W tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:47] Overriding orig_value setting because the TF_FORCE_GPU_ALLOW_GROWTH environment variable is set. Original config value was 0.
+2023-05-01 21:24:01.324392: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1635] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 8640 MB memory:  -> device: 0, name: Tesla T4, pci bus id: 0000:00:04.0, compute capability: 7.5
+2023-05-01 21:24:01.331491: I tensorflow/compiler/xla/service/service.cc:169] XLA service 0xbb2b9d0 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2023-05-01 21:24:01.331599: I tensorflow/compiler/xla/service/service.cc:177]   StreamExecutor device (0): Tesla T4, Compute Capability 7.5
+2023-05-01 21:24:01.458470: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [2]
+	 [[{{node Placeholder/_0}}]]
+2023-05-01 21:24:01.458964: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [2]
+	 [[{{node Placeholder/_0}}]]
+==== train: dataset_folder:/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets/Avazu-new/X_5/orig_24
+05/01 09:24:41 PM train 1000 4.036082e-01
+05/01 09:24:41 PM Time 41.914134
+05/01 09:25:23 PM train_loss 0.399832
+2023-05-01 21:25:23.485131: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [1]
+	 [[{{node Placeholder/_0}}]]
+2023-05-01 21:25:23.497161: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [1]
+	 [[{{node Placeholder/_0}}]]
+==== infer: dataset_folder:/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets/Avazu-new/X_5/orig_24
+05/01 09:25:29 PM test_auc 0.755932
+05/01 09:25:29 PM test_log_loss 0.392699
+05/01 09:25:29 PM Epoch time: 90.060731 s
+05/01 09:25:29 PM Train time: 83.667580 s
+05/01 09:25:29 PM Test time: 6.016472 s
+05/01 09:25:29 PM epoch 1 lr 1.000000e-03
+2023-05-01 21:25:29.854979: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [2]
+	 [[{{node Placeholder/_0}}]]
+2023-05-01 21:25:29.855458: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [2]
+	 [[{{node Placeholder/_0}}]]
+==== train: dataset_folder:/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets/Avazu-new/X_5/orig_24
+05/01 09:25:51 PM train 1000 3.816637e-01
+05/01 09:25:51 PM Time 21.862659
+05/01 09:26:10 PM train_loss 0.382351
+2023-05-01 21:26:10.853430: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [1]
+	 [[{{node Placeholder/_0}}]]
+2023-05-01 21:26:10.853897: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype string and shape [1]
+	 [[{{node Placeholder/_0}}]]
+==== infer: dataset_folder:/content/drive/MyDrive/Lehigh/Courses/DSCI 441 Statistical and Machine Learning/project/Recommendation_Systems/datasets/Avazu-new/X_5/orig_24
+05/01 09:26:12 PM test_auc 0.753893
+05/01 09:26:12 PM test_log_loss 0.394573
+05/01 09:26:12 PM Early stopped!
+05/01 09:26:12 PM best_test_auc 0.755932
+05/01 09:26:12 PM best_log_loss 0.392699
