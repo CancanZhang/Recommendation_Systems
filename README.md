@@ -85,6 +85,24 @@ nohup python learn/AvazuTrain.py --model AFM --gpu 0 --lr 0.01 &> res/train_avaz
 
 ```
 
+
+### Comparing Embedding Size
+
+```
+cd model
+nohup python learn/CriteoTrain.py --model IPNN --gpu 0 --orig_embedding_dim 5 &> res/train_criteo_ipnn_d5 &
+nohup python learn/CriteoTrain.py --model IPNN --gpu 0 --orig_embedding_dim 10 &> res/train_criteo_ipnn_d10 &
+nohup python learn/CriteoTrain.py --model IPNN --gpu 0 --orig_embedding_dim 20 &> res/train_criteo_ipnn_d20 &
+nohup python learn/CriteoTrain.py --model IPNN --gpu 0 --orig_embedding_dim 80 &> res/train_criteo_ipnn_d80 &
+
+
+nohup python learn/AvazuTrain.py --model IPNN --gpu 0 --orig_embedding_dim 5 &> res/train_avazu_ipnn_d5 &
+nohup python learn/AvazuTrain.py --model IPNN --gpu 0 --orig_embedding_dim 10 &> res/train_avazu_ipnn_d10 &
+nohup python learn/AvazuTrain.py --model IPNN --gpu 0 --orig_embedding_dim 20 &> res/train_avazu_ipnn_d20 &
+nohup python learn/AvazuTrain.py --model IPNN --gpu 0 --orig_embedding_dim 80 &> res/train_avazu_ipnn_d80 &
+
+```
+
 #### Appendix
 
 Attention FM refered to: 
