@@ -96,4 +96,16 @@ df = pd.DataFrame(
             columns=methods)
 st.dataframe(df)
 
+st.subheader('Effects of Embedding Size')
+tab1, tab2 = st.tabs(['Avazu','Criteo'])
+with tab1:
+    st.write("Best performance: embedding size 40.")
+    image = Image.open('figs/emb_avazu.png')
+    st.image(image)
+
+with tab2:
+    st.write("Best performance: embedding size 20.")
+    image = Image.open('figs/emb_criteo.png')
+    st.image(image)
+
 
