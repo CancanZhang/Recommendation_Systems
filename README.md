@@ -28,14 +28,6 @@ streamlit run app.py
 pip install -r model/requirements.txt
 ```
 
-
-### Folder
-```
-cd /content/drive/MyDrive/Lehigh/Courses/'DSCI 441 Statistical and Machine Learning'/project/Recommendation_Systems/model/
-
-cd /Users/cancan/caz322@lehigh.edu\ -\ Google\ Drive/My\ Drive/Lehigh/Courses/DSCI\ 441\ Statistical\ and\ Machine\ Learning/project/Recommendation_Systems
-```
-
 ### Dataset
 Criteo dataset: https://www.kaggle.com/datasets/mrkmakr/criteo-dataset
 
